@@ -1,5 +1,7 @@
-var express = require('express');
-var router = express.Router();
+const express = require("express");
+const app = express();
+
+app.get("/", (req, res) => res.send("You're not supposed to be here!"));
 
 // Helper Functions
 function alphabetPosition(text) {
@@ -7,12 +9,12 @@ function alphabetPosition(text) {
 }
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+app.get('/', function(req, res) {
   res.render('index');
 });
 
 // Define the API route
-router.post('/type', (req, res) => {
+app.post('/type', (req, res) => {
   // Extract values from the request body
   const { name, value1, value2, emotion } = req.body;
 
@@ -58,4 +60,6 @@ router.post('/type', (req, res) => {
 });
 
 
-module.exports = router;
+app.listen(3000, () => console.log("Server ready on port 3000."));
+
+module.exports = app;
